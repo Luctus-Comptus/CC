@@ -404,3 +404,22 @@
 		if(hag_mind.current)
 			to_chat(hag_mind.current, span_boldnotice("A familiar rhythm pulses in the roots... [recipient.real_name] is walking the lands this week."))
 	to_chat(recipient, span_boldnotice("The Mossmother's gaze lingers upon you. You are recognized by her daughters."))
+
+/datum/virtue/utility/beastial
+	name = "Bestial (-5 TRI)"
+	added_traits = list(TRAIT_NASTY_EATER, TRAIT_STRONGBITE)
+	desc= "Feral by nature of by some linguring transformation, your claws are still razor sharp, your bite deadly and your hunger staggering."
+	triumph_cost = 5
+
+/datum/virtue/utility/beastial/apply_to_human(mob/living/carbon/human/recipient)
+	if(!recipient.mind?.has_spell(/datum/action/cooldown/spell/gnoll/consume/beastial))
+					recipient.mind?.AddSpell(new /datum/action/cooldown/spell/gnoll/consume/beastial)
+	if(!recipient.mind?.has_spell(/obj/effect/proc_holder/spell/self/claws/beastial))
+					recipient.mind?.AddSpell(new /obj/effect/proc_holder/spell/self/claws/beastial)
+
+/obj/effect/proc_holder/spell/self/claws/gnoll/beastial
+	name = "Beastial Claws"
+	claw_type = /obj/item/rogueweapon/werewolf_claw/gnoll
+
+/datum/action/cooldown/spell/gnoll/consume/beastial
+	fluff_desc = "Consume your fallen prey."
